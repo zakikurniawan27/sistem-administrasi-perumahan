@@ -11,6 +11,7 @@ const Pembayaran = () => {
           <div className="flex">
             <h1 className="text-2xl font-bold">Pembayaran</h1>
           </div>
+          <div></div>
         </section>
       </div>
     </main>
