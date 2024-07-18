@@ -3,11 +3,16 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Penghuni from "./pages/penghuni/Penghuni.jsx";
 
 const rout = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/penghuni",
+    element: <Penghuni />,
   },
 ]);
 
