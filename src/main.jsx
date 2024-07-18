@@ -5,7 +5,6 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Penghuni from "./pages/penghuni/Penghuni.jsx";
 import Rumah from "./pages/rumah/Rumah.jsx";
-import Pembayaran from "./pages/pembayaran/Pembayaran.jsx";
 
 const rout = createBrowserRouter([
   {
@@ -19,10 +18,6 @@ const rout = createBrowserRouter([
   {
     path: "/rumah",
     element: <Rumah />,
-  },
-  {
-    path: "/pembayaran",
-    element: <Pembayaran />,
   },
 ]);
 
