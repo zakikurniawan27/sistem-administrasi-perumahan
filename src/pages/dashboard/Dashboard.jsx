@@ -15,7 +15,7 @@ const Dashboard = () => {
             <p className="text-sm font-light">Selamat datang, Admin</p>
           </div>
           <div className="flex flex-row gap-4">
-            <div className="w-max h-max p-5 rounded-md shadow-md bg-sky-500 text-white">
+            <div className="w-max h-max p-5 rounded-md shadow-md bg-sky-500 text-white hover:cursor-pointer">
               <div className="flex flex-col gap-2">
                 <div className="flex flex-row justify-center gap-2">
                   <p className="text-2xl pt-0.5">
@@ -26,7 +26,7 @@ const Dashboard = () => {
                 <p className="text-lg font-medium">Total Penghuni : 10 orang</p>
               </div>
             </div>
-            <div className="w-max h-max p-5 rounded-md shadow-md bg-sky-500 text-white">
+            <div className="w-max h-max p-5 rounded-md shadow-md bg-sky-500 text-white hover:cursor-pointer">
               <div className="flex flex-col gap-2">
                 <div className="flex flex-row justify-center gap-2">
                   <p className="text-2xl pt-0.5">
