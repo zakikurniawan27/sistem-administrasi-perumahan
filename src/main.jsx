@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Penghuni from "./pages/penghuni/Penghuni.jsx";
+import Rumah from "./pages/rumah/Rumah.jsx";
 
 const rout = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const rout = createBrowserRouter([
   {
     path: "/penghuni",
     element: <Penghuni />,
+  },
+  {
+    path: "/rumah",
+    element: <Rumah />,
   },
 ]);
 
