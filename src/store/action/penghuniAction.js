@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { editPenghuniReducer } from "../reducer/penghuniReducer";
 
 export const getDataPenghuni = createAsyncThunk(
   "penghuni/getDataPenghuni",
@@ -34,3 +35,16 @@ export const detailPenghuni = createAsyncThunk(
     return data.data;
   }
 );
+
+export const updatePenghuni = (id, data) => async (dispatch) => {
+  const { res } = await axios.put(
+    `http://localhost:8080/api/v1/penghuni/update/penghuni/${id}`,
+    data,
+    {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    }
+  );
+  dispatch(editPenghuniReducer(res));
+};

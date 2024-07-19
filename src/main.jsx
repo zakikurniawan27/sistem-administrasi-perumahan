@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store.js";
 import TambahPenghuni from "./pages/penghuni/TambahPenghuni.jsx";
 import DetailPenghuni from "./pages/penghuni/DetailPenghuni.jsx";
+import EditPenghuni from "./pages/penghuni/EditPenghuni.jsx";
 
 const rout = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const rout = createBrowserRouter([
   {
     path: "/detail-penghuni/:id",
     element: <DetailPenghuni />,
+  },
+  {
+    path: "/update-penghuni/:id",
+    element: <EditPenghuni />,
   },
   {
     path: "/rumah",

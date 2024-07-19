@@ -8,6 +8,7 @@ import {
 const initialState = {
   data: null,
   detail: [],
+  edit: [],
 };
 
 export const penghuniReducer = createSlice({
@@ -23,7 +24,16 @@ export const penghuniReducer = createSlice({
     builder.addCase(detailPenghuni.fulfilled, (state, action) => {
       state.detail = action.payload;
     });
+    // builder.addCase(updatePenghuni.fulfilled, (state, action) => {
+    //   state.data = action.payload;
+    // });
+  },
+  reducers: {
+    editPenghuniReducer: (state, action) => {
+      state.edit = action.payload;
+    },
   },
 });
 
+export const { editPenghuniReducer } = penghuniReducer.actions;
 export default penghuniReducer.reducer;

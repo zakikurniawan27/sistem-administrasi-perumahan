@@ -54,9 +54,11 @@ const Penghuni = () => {
                                 <BiSolidDetail />
                               </p>
                             </Link>
-                            <p className="text-yellow-500 text-2xl">
-                              <FaEdit />
-                            </p>
+                            <Link to={`/update-penghuni/${item.id}`}>
+                              <p className="text-yellow-500 text-2xl">
+                                <FaEdit />
+                              </p>
+                            </Link>
                           </div>
                         </td>
                       </tr>
