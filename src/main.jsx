@@ -6,6 +6,9 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Penghuni from "./pages/penghuni/Penghuni.jsx";
 import Rumah from "./pages/rumah/Rumah.jsx";
 import Pembayaran from "./pages/pembayaran/Pembayaran.jsx";
+import { Provider } from "react-redux";
+import { store } from "./store/store.js";
+import TambahPenghuni from "./pages/penghuni/TambahPenghuni.jsx";
 
 const rout = createBrowserRouter([
   {
@@ -15,6 +18,10 @@ const rout = createBrowserRouter([
   {
     path: "/penghuni",
     element: <Penghuni />,
+  },
+  {
+    path: "/tambah-penghuni",
+    element: <TambahPenghuni />,
   },
   {
     path: "/rumah",
@@ -28,6 +35,8 @@ const rout = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={rout} />
+    <Provider store={store}>
+      <RouterProvider router={rout} />
+    </Provider>
   </React.StrictMode>
 );
