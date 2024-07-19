@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addPenghuni, getDataPenghuni } from "../action/penghuniAction";
+import {
+  addPenghuni,
+  detailPenghuni,
+  getDataPenghuni,
+} from "../action/penghuniAction";
 
 const initialState = {
   data: null,
@@ -15,6 +19,9 @@ export const penghuniReducer = createSlice({
     });
     builder.addCase(addPenghuni.fulfilled, (state, action) => {
       state.data = action.payload;
+    });
+    builder.addCase(detailPenghuni.fulfilled, (state, action) => {
+      state.detail = action.payload;
     });
   },
 });

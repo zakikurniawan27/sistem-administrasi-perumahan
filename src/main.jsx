@@ -9,6 +9,7 @@ import Pembayaran from "./pages/pembayaran/Pembayaran.jsx";
 import { Provider } from "react-redux";
 import { store } from "./store/store.js";
 import TambahPenghuni from "./pages/penghuni/TambahPenghuni.jsx";
+import DetailPenghuni from "./pages/penghuni/DetailPenghuni.jsx";
 
 const rout = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const rout = createBrowserRouter([
   {
     path: "/tambah-penghuni",
     element: <TambahPenghuni />,
+  },
+  {
+    path: "/detail-penghuni/:id",
+    element: <DetailPenghuni />,
   },
   {
     path: "/rumah",

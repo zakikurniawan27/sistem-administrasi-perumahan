@@ -24,3 +24,13 @@ export const addPenghuni = createAsyncThunk(
     return res;
   }
 );
+
+export const detailPenghuni = createAsyncThunk(
+  "penghuni/detailPenghuni",
+  async (id) => {
+    const data = await axios.get(
+      `http://localhost:8080/api/v1/penghuni/detail/penghuni/${id}`
+    );
+    return data.data;
+  }
+);
