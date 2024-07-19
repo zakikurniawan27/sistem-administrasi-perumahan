@@ -49,12 +49,16 @@ const Penghuni = () => {
                         <td>{item.status_hunian}</td>
                         <td>
                           <div className="flex flex-row gap-2 justify-center">
-                            <p className="text-gray-500 text-2xl">
-                              <BiSolidDetail />
-                            </p>
-                            <p className="text-yellow-500 text-2xl">
-                              <FaEdit />
-                            </p>
+                            <Link to={`/detail-penghuni/${item.id}`}>
+                              <p className="text-gray-500 text-2xl">
+                                <BiSolidDetail />
+                              </p>
+                            </Link>
+                            <Link to={`/update-penghuni/${item.id}`}>
+                              <p className="text-yellow-500 text-2xl">
+                                <FaEdit />
+                              </p>
+                            </Link>
                           </div>
                         </td>
                       </tr>
