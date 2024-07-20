@@ -1,30 +1,29 @@
 import { useEffect, useState } from "react";
-import Header from "../../components/Header";
-import LeftContent from "../../components/LeftContent";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { addPenghuni } from "../../store/action/penghuniAction";
-import { useNavigate } from "react-router-dom";
 import {
   getDataRumah,
-  updateStatusHunian,
+  getDetailDataRumah,
 } from "../../store/action/rumahAction";
+import Header from "../../components/Header";
+import LeftContent from "../../components/LeftContent";
 
-const TambahPenghuni = () => {
+const TambahPenghuniRumah = () => {
+  const { detail } = useSelector((state) => state.rumah);
+  const { rumah } = useSelector((state) => state.rumah);
+  const params = useParams();
   const [dataPenghuni, setDataPenghuni] = useState({
     nama_lengkap: "",
     foto_ktp: "",
     status_hunian: "",
     nomor_telepon: "",
     status_pernikahan: "",
-    rumahId: null,
+    rumahId: detail?.detail?.id,
   });
 
-  const { rumah } = useSelector((state) => state.rumah);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const statusHunian = {
-    status_hunian: "DIHUNI",
-  };
 
   const submit = async (e) => {
     e.preventDefault();
@@ -56,10 +55,9 @@ const TambahPenghuni = () => {
         formData.append("rumahId", dataPenghuni.rumahId);
 
         dispatch(addPenghuni(formData));
-        dispatch(updateStatusHunian(dataPenghuni.rumahId, statusHunian));
 
         alert("create data penghuni success");
-        navigate("/penghuni");
+        navigate(`/rumah/detail/${params.id}`);
       }
     } catch (error) {
       alert(error);
@@ -68,8 +66,9 @@ const TambahPenghuni = () => {
   };
 
   useEffect(() => {
+    dispatch(getDetailDataRumah(params.id));
     dispatch(getDataRumah());
-  }, [dispatch]);
+  }, [dispatch, params]);
   return (
     <main>
       <Header />
@@ -223,9 +222,11 @@ const TambahPenghuni = () => {
                           rumahId: Number(e.target.value),
                         });
                       }}
+                      disabled
                     >
                       <option value="" disabled selected>
-                        Pilih Nomor Rumah
+                        {detail?.detail?.nomor_rumah}{" "}
+                        {detail?.detail?.blok_rumah}
                       </option>
                       {rumah?.rumah?.map((item) => (
                         <option key={item.id} value={item.id}>
@@ -250,4 +251,4 @@ const TambahPenghuni = () => {
   );
 };
 
-export default TambahPenghuni;
+export default TambahPenghuniRumah;

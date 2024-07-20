@@ -1,31 +1,40 @@
 import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import LeftContent from "../../components/LeftContent";
+import { getDataRumah } from "../../store/action/rumahAction";
+import { updatePenghuni } from "../../store/action/penghuniAction";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addPenghuni } from "../../store/action/penghuniAction";
-import { useNavigate } from "react-router-dom";
-import {
-  getDataRumah,
-  updateStatusHunian,
-} from "../../store/action/rumahAction";
 
-const TambahPenghuni = () => {
+const EditPenghuniRumah = () => {
+  const { rumah } = useSelector((state) => state.rumah);
+  const params = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [dataPenghuni, setDataPenghuni] = useState({
     nama_lengkap: "",
     foto_ktp: "",
     status_hunian: "",
     nomor_telepon: "",
     status_pernikahan: "",
-    rumahId: null,
+    rumahId: "",
   });
 
-  const { rumah } = useSelector((state) => state.rumah);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const statusHunian = {
-    status_hunian: "DIHUNI",
+  const fetchDetail = async () => {
+    const data = await axios.get(
+      `http://localhost:8080/api/v1/penghuni/detail/penghuni/${params.id}`
+    );
+    setDataPenghuni({
+      nama_lengkap: data?.data?.detail?.nama_lengkap,
+      foto_ktp: data?.data?.detail?.foto_ktp,
+      status_hunian: data?.data?.detail?.status_hunian,
+      nomor_telepon: data?.data?.detail?.nomor_telepon,
+      status_pernikahan: data?.data?.detail?.status_pernikahan,
+      rumahId: data?.data?.detail?.rumahId,
+    });
   };
-
   const submit = async (e) => {
     e.preventDefault();
     try {
@@ -34,8 +43,7 @@ const TambahPenghuni = () => {
         !dataPenghuni.foto_ktp ||
         !dataPenghuni.status_hunian ||
         !dataPenghuni.nomor_telepon ||
-        !dataPenghuni.status_pernikahan ||
-        !dataPenghuni.rumahId
+        !dataPenghuni.status_pernikahan
       ) {
         alert("field must not empty");
       }
@@ -44,8 +52,7 @@ const TambahPenghuni = () => {
         dataPenghuni.foto_ktp ||
         dataPenghuni.status_hunian ||
         dataPenghuni.nomor_telepon ||
-        dataPenghuni.status_pernikahan ||
-        dataPenghuni.rumahId
+        dataPenghuni.status_pernikahan
       ) {
         const formData = new FormData();
         formData.append("nama_lengkap", dataPenghuni.nama_lengkap);
@@ -54,12 +61,9 @@ const TambahPenghuni = () => {
         formData.append("nomor_telepon", dataPenghuni.nomor_telepon);
         formData.append("status_pernikahan", dataPenghuni.status_pernikahan);
         formData.append("rumahId", dataPenghuni.rumahId);
-
-        dispatch(addPenghuni(formData));
-        dispatch(updateStatusHunian(dataPenghuni.rumahId, statusHunian));
-
-        alert("create data penghuni success");
-        navigate("/penghuni");
+        dispatch(updatePenghuni(params.id, formData));
+        alert("edit data penghuni success");
+        navigate(`/rumah/detail/${dataPenghuni.rumahId}`);
       }
     } catch (error) {
       alert(error);
@@ -68,6 +72,7 @@ const TambahPenghuni = () => {
   };
 
   useEffect(() => {
+    fetchDetail();
     dispatch(getDataRumah());
   }, [dispatch]);
   return (
@@ -75,16 +80,16 @@ const TambahPenghuni = () => {
       <Header />
       <div className="flex flex-row">
         <LeftContent />
-        <section className="bg-gray-100 flex flex-col gap-5 p-20 w-screen">
+        <section className="bg-gray-100 flex flex-col gap-5 p-20">
           <div className="flex">
-            <h1 className="text-2xl font-bold">Tambah Penghuni</h1>
+            <h1 className="text-2xl font-bold">Edit Penghuni</h1>
           </div>
           <div className="w-max h-max p-7 bg-white rounded-md shadow-md border">
             <div className="w-[63rem]">
               <form
                 onSubmit={submit}
                 className="flex flex-col gap-5"
-                method="post"
+                method="put"
                 encType="multipart/form-data"
               >
                 <div className="flex flex-row justify-between gap-3">
@@ -151,7 +156,7 @@ const TambahPenghuni = () => {
                       }}
                     >
                       <option value="" disabled selected>
-                        Pilih Status Hunian
+                        {dataPenghuni.status_hunian}
                       </option>
                       <option value="Tetap">Tetap</option>
                       <option value="Kontrak">Kontrak</option>
@@ -200,7 +205,7 @@ const TambahPenghuni = () => {
                       }}
                     >
                       <option value="" disabled selected>
-                        Pilih Status Pernikahan
+                        {dataPenghuni.status_pernikahan}
                       </option>
                       <option value="Sudah Menikah">Sudah Menikah</option>
                       <option value="Belum Menikah">Belum Menikah</option>
@@ -225,7 +230,13 @@ const TambahPenghuni = () => {
                       }}
                     >
                       <option value="" disabled selected>
-                        Pilih Nomor Rumah
+                        {rumah?.rumah
+                          ?.filter((item) => item.id === dataPenghuni.rumahId)
+                          ?.map((item) => (
+                            <>
+                              {item.nomor_rumah} {item.blok_rumah}
+                            </>
+                          ))}
                       </option>
                       {rumah?.rumah?.map((item) => (
                         <option key={item.id} value={item.id}>
@@ -250,4 +261,4 @@ const TambahPenghuni = () => {
   );
 };
 
-export default TambahPenghuni;
+export default EditPenghuniRumah;
