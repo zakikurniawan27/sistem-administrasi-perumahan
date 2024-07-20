@@ -43,7 +43,9 @@ const DetailRumah = () => {
                 <h3 className="text-lg font-semibold">Penghuni Rumah</h3>
                 <div className="flex justify-end">
                   <button className="w-max h-max p-3 rounded-md shadow-sm text-white bg-sky-500 hover:bg-sky-700">
-                    <Link to={"/tambah-penghuni"}>Tambah Penghuni</Link>
+                    <Link to={`/rumah/tambah-penghuni/${detail?.detail?.id}`}>
+                      Tambah Penghuni
+                    </Link>
                   </button>
                 </div>
                 <div className="w-[60rem]">
@@ -69,7 +71,7 @@ const DetailRumah = () => {
                                   <BiSolidDetail />
                                 </p>
                               </Link>
-                              <Link to={`/update-penghuni/${item.id}`}>
+                              <Link to={`/rumah/update-penghuni/${item.id}`}>
                                 <p className="text-yellow-500 text-2xl">
                                   <FaEdit />
                                 </p>
