@@ -2,8 +2,20 @@ import { FaPersonShelter } from "react-icons/fa6";
 import Header from "../../components/Header";
 import { FaHome } from "react-icons/fa";
 import LeftContent from "../../components/LeftContent";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getDataPenghuni } from "../../store/action/penghuniAction";
+import { getDataRumah } from "../../store/action/rumahAction";
 
 const Dashboard = () => {
+  const { data } = useSelector((state) => state.penghuni);
+  const { rumah } = useSelector((state) => state.rumah);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getDataPenghuni());
+    dispatch(getDataRumah());
+  }, [dispatch]);
   return (
     <main>
       <Header />
@@ -23,7 +35,9 @@ const Dashboard = () => {
                   </p>
                   <p className="text-xl font-medium uppercase">Penghuni</p>
                 </div>
-                <p className="text-lg font-medium">Total Penghuni : 10 orang</p>
+                <p className="text-lg font-medium">
+                  Total Penghuni : {data?.penghuni?.length} orang
+                </p>
               </div>
             </div>
             <div className="w-max h-max p-5 rounded-md shadow-md bg-sky-500 text-white hover:cursor-pointer">
@@ -34,7 +48,9 @@ const Dashboard = () => {
                   </p>
                   <p className="text-xl font-medium uppercase">Rumah</p>
                 </div>
-                <p className="text-lg font-medium">Total Rumah : 20 rumah</p>
+                <p className="text-lg font-medium">
+                  Total Rumah : {rumah?.rumah?.length} rumah
+                </p>
               </div>
             </div>
           </div>
