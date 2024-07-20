@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { editStatusHunianReducer } from "../reducer/rumahReducer";
+import { editRumah, editStatusHunianReducer } from "../reducer/rumahReducer";
 
 export const getDataRumah = createAsyncThunk("rumah/getDataRumah", async () => {
   const data = await axios.get("http://localhost:8080/api/v1/rumah");
@@ -9,10 +9,18 @@ export const getDataRumah = createAsyncThunk("rumah/getDataRumah", async () => {
 
 export const updateStatusHunian = (id, data) => async (dispatch) => {
   const { res } = await axios.patch(
-    `http://localhost:8080/api/v1/rumah//update/status/hunian/${id}`,
+    `http://localhost:8080/api/v1/rumah/update/status/hunian/${id}`,
     data
   );
   dispatch(editStatusHunianReducer(res));
+};
+
+export const updateRumah = (id, data) => async (dispatch) => {
+  const { res } = await axios.put(
+    `http://localhost:8080/api/v1/rumah/update/${id}`,
+    data
+  );
+  dispatch(editRumah(res));
 };
 
 export const getDetailDataRumah = createAsyncThunk(

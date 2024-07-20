@@ -9,6 +9,7 @@ const initialState = {
   rumah: [],
   detail: [],
   statusHunian: [],
+  edit: [],
 };
 
 export const rumahReducer = createSlice({
@@ -29,8 +30,11 @@ export const rumahReducer = createSlice({
     editStatusHunianReducer: (state, action) => {
       state.statusHunian = action.payload;
     },
+    editRumah: (state, action) => {
+      state.edit = action.payload;
+    },
   },
 });
 
-export const { editStatusHunianReducer } = rumahReducer.actions;
+export const { editStatusHunianReducer, editRumah } = rumahReducer.actions;
 export default rumahReducer.reducer;

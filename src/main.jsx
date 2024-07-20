@@ -13,6 +13,7 @@ import DetailPenghuni from "./pages/penghuni/DetailPenghuni.jsx";
 import EditPenghuni from "./pages/penghuni/EditPenghuni.jsx";
 import DetailRumah from "./pages/rumah/DetailRumah.jsx";
 import TambahRumah from "./pages/rumah/TambahRumah.jsx";
+import EditRumah from "./pages/rumah/EditRumah.jsx";
 
 const rout = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const rout = createBrowserRouter([
   {
     path: "/rumah/detail/:id",
     element: <DetailRumah />,
+  },
+  {
+    path: "/rumah/edit/:id",
+    element: <EditRumah />,
   },
   {
     path: "/pembayaran",

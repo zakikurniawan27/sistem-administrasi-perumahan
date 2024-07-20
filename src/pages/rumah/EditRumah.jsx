@@ -1,33 +1,59 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import LeftContent from "../../components/LeftContent";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addRumah } from "../../store/action/rumahAction";
+import axios from "axios";
+import { updateRumah } from "../../store/action/rumahAction";
 
-const TambahRumah = () => {
+const EditRumah = () => {
+  const params = useParams();
   const [dataRumah, setDataRumah] = useState({
     nomor_rumah: "",
+    status_hunian: "",
     blok_rumah: "",
   });
 
+  const fetchDetail = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:8080/api/v1/rumah/detail/${params.id}`
+      );
+      setDataRumah({
+        nomor_rumah: res?.data?.detail?.nomor_rumah,
+        status_hunian: res?.data?.detail?.status_hunian,
+        blok_rumah: res?.data?.detail?.blok_rumah,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const submit = async (e) => {
     e.preventDefault();
     try {
-      if (!dataRumah.nomor_rumah || !dataRumah.blok_rumah) {
+      if (
+        !dataRumah.nomor_rumah ||
+        !dataRumah.blok_rumah ||
+        !dataRumah.status_hunian
+      ) {
         alert("field must not empty");
       }
-      if (dataRumah.nomor_rumah || dataRumah.blok_rumah) {
+      if (
+        dataRumah.nomor_rumah ||
+        dataRumah.blok_rumah ||
+        dataRumah.status_hunian
+      ) {
         const data = {
           nomor_rumah: dataRumah.nomor_rumah,
+          status_hunian: dataRumah.status_hunian,
           blok_rumah: dataRumah.blok_rumah,
         };
-        dispatch(addRumah(data));
+        dispatch(updateRumah(params.id, data));
 
-        alert("create data rumah success");
+        alert("edit data rumah success");
         navigate("/rumah");
       }
     } catch (error) {
@@ -36,6 +62,9 @@ const TambahRumah = () => {
     }
   };
 
+  useEffect(() => {
+    fetchDetail();
+  }, []);
   return (
     <main>
       <Header />
@@ -43,7 +72,7 @@ const TambahRumah = () => {
         <LeftContent />
         <section className="bg-gray-100 flex flex-col gap-5 p-20 w-screen">
           <div className="flex">
-            <h1 className="text-2xl font-bold">Tambah Rumah</h1>
+            <h1 className="text-2xl font-bold">Edit Rumah</h1>
           </div>
           <div className="w-max h-max p-7 bg-white rounded-md shadow-md border">
             <div className="w-[63rem]">
@@ -53,7 +82,7 @@ const TambahRumah = () => {
                 method="post"
                 encType="multipart/form-data"
               >
-                <div className="flex flex-row justify-between gap-3">
+                <div className="flex flex-col gap-3">
                   <div className="flex flex-col gap-2">
                     <label
                       htmlFor="nomor_rumah"
@@ -65,7 +94,7 @@ const TambahRumah = () => {
                       type="number"
                       name="nomor_rumah"
                       id="nomor_rumah"
-                      className="w-[25rem] h-10 text-black p-2 border rounded-md"
+                      className="w-full h-10 text-black p-2 border rounded-md"
                       placeholder="harap masukan nomor rumah anda"
                       value={dataRumah.nomor_rumah}
                       onChange={(e) => {
@@ -86,7 +115,7 @@ const TambahRumah = () => {
                     <select
                       name="blok_rumah"
                       id="blok_rumah"
-                      className="w-[25rem] h-10 text-black p-2 border rounded-md"
+                      className="w-full h-10 text-black p-2 border rounded-md"
                       onChange={(e) => {
                         setDataRumah({
                           ...dataRumah,
@@ -95,12 +124,37 @@ const TambahRumah = () => {
                       }}
                     >
                       <option value="" disabled selected>
-                        Pilih Blok Rumah
+                        {dataRumah.blok_rumah}
                       </option>
                       <option value="A">A</option>
                       <option value="B">B</option>
                       <option value="C">c</option>
                       <option value="D">D</option>
+                    </select>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label
+                      htmlFor="status_hunian"
+                      className="font-semibold uppercase text-base"
+                    >
+                      Status Hunian
+                    </label>
+                    <select
+                      name="status_hunian"
+                      id="status_hunian"
+                      className="w-full h-10 text-black p-2 border rounded-md"
+                      onChange={(e) => {
+                        setDataRumah({
+                          ...dataRumah,
+                          status_hunian: e.target.value,
+                        });
+                      }}
+                    >
+                      <option value="" disabled selected>
+                        {dataRumah.status_hunian}
+                      </option>
+                      <option value="DIHUNI">DIHUNI</option>
+                      <option value="TIDAK DIHUNI">TIDAK DIHUNI</option>
                     </select>
                   </div>
                 </div>
@@ -119,4 +173,4 @@ const TambahRumah = () => {
   );
 };
 
-export default TambahRumah;
+export default EditRumah;

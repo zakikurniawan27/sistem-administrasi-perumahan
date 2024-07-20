@@ -54,7 +54,7 @@ const Rumah = () => {
                                 <BiSolidDetail />
                               </p>
                             </Link>
-                            <Link to={`/update-penghuni/${item.id}`}>
+                            <Link to={`/rumah/edit/${item.id}`}>
                               <p className="text-yellow-500 text-2xl">
                                 <FaEdit />
                               </p>
