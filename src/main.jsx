@@ -11,6 +11,7 @@ import { store } from "./store/store.js";
 import TambahPenghuni from "./pages/penghuni/TambahPenghuni.jsx";
 import DetailPenghuni from "./pages/penghuni/DetailPenghuni.jsx";
 import EditPenghuni from "./pages/penghuni/EditPenghuni.jsx";
+import DetailRumah from "./pages/rumah/DetailRumah.jsx";
 
 const rout = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const rout = createBrowserRouter([
   {
     path: "/rumah",
     element: <Rumah />,
+  },
+  {
+    path: "/rumah/detail/:id",
+    element: <DetailRumah />,
   },
   {
     path: "/pembayaran",

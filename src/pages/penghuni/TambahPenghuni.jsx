@@ -4,7 +4,10 @@ import LeftContent from "../../components/LeftContent";
 import { useDispatch, useSelector } from "react-redux";
 import { addPenghuni } from "../../store/action/penghuniAction";
 import { useNavigate } from "react-router-dom";
-import { getDataRumah } from "../../store/action/rumahAction";
+import {
+  getDataRumah,
+  updateStatusHunian,
+} from "../../store/action/rumahAction";
 
 const TambahPenghuni = () => {
   const [dataPenghuni, setDataPenghuni] = useState({
@@ -19,6 +22,10 @@ const TambahPenghuni = () => {
   const { rumah } = useSelector((state) => state.rumah);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const statusHunian = {
+    status_hunian: "DIHUNI",
+  };
+
   const submit = async (e) => {
     e.preventDefault();
     try {
@@ -47,7 +54,10 @@ const TambahPenghuni = () => {
         formData.append("nomor_telepon", dataPenghuni.nomor_telepon);
         formData.append("status_pernikahan", dataPenghuni.status_pernikahan);
         formData.append("rumahId", dataPenghuni.rumahId);
+
         dispatch(addPenghuni(formData));
+        dispatch(updateStatusHunian(dataPenghuni.rumahId, statusHunian));
+
         alert("create data penghuni success");
         navigate("/penghuni");
       }
