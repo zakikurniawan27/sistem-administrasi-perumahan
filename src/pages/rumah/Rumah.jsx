@@ -26,7 +26,7 @@ const Rumah = () => {
             <div className="flex flex-col gap-3">
               <div className="flex justify-end">
                 <button className="w-max h-max p-3 rounded-md shadow-sm text-white bg-sky-500 hover:bg-sky-700">
-                  <Link to={"/tambah-penghuni"}>Tambah Rumah</Link>
+                  <Link to={"/rumah/tambah"}>Tambah Rumah</Link>
                 </button>
               </div>
               <div className="w-[60rem]">

@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getDataRumah, getDetailDataRumah } from "../action/rumahAction";
+import {
+  addRumah,
+  getDataRumah,
+  getDetailDataRumah,
+} from "../action/rumahAction";
 
 const initialState = {
   rumah: [],
@@ -16,6 +20,9 @@ export const rumahReducer = createSlice({
     });
     builder.addCase(getDetailDataRumah.fulfilled, (state, action) => {
       state.detail = action.payload;
+    });
+    builder.addCase(addRumah.fulfilled, (state, action) => {
+      state.rumah = action.payload;
     });
   },
   reducers: {
