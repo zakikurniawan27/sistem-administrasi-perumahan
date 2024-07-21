@@ -4,6 +4,7 @@ import LeftContent from "../../components/LeftContent";
 import { MdCleaningServices } from "react-icons/md";
 import { Link } from "react-router-dom";
 import ContentGrafik from "../../components/ContentGrafik";
+import { GiPayMoney } from "react-icons/gi";
 
 const Pembayaran = () => {
   return (
@@ -36,6 +37,18 @@ const Pembayaran = () => {
                       <MdCleaningServices />
                     </p>
                     <p className="text-xl font-medium uppercase">Kebersihan</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+            <Link to={"/pengeluaran"}>
+              <div className="w-max h-max px-7 py-10  rounded-md shadow-md bg-sky-500 text-white hover:cursor-pointer hover:bg-sky-700">
+                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col items-center justify-center gap-2 hover:bg-sky-700">
+                    <p className="text-2xl pt-0.5">
+                      <GiPayMoney />
+                    </p>
+                    <p className="text-xl font-medium uppercase">Pengeluaran</p>
                   </div>
                 </div>
               </div>
