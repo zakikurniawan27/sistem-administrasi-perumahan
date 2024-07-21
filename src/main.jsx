@@ -16,6 +16,8 @@ import TambahRumah from "./pages/rumah/TambahRumah.jsx";
 import EditRumah from "./pages/rumah/EditRumah.jsx";
 import TambahPenghuniRumah from "./pages/rumah/TambahPenghuniRumah.jsx";
 import EditPenghuniRumah from "./pages/rumah/EditPenghuniRumah.jsx";
+import PembayaranSatpam from "./pages/pembayaran/PembayaranSatpam.jsx";
+import PembayaranKebersihan from "./pages/pembayaran/PembayaranKebersihan.jsx";
 
 const rout = createBrowserRouter([
   {
@@ -65,6 +67,14 @@ const rout = createBrowserRouter([
   {
     path: "/pembayaran",
     element: <Pembayaran />,
+  },
+  {
+    path: "/bayar/iuran/satpam",
+    element: <PembayaranSatpam />,
+  },
+  {
+    path: "/bayar/iuran/kebersihan",
+    element: <PembayaranKebersihan />,
   },
 ]);
 

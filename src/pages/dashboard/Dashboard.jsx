@@ -21,12 +21,12 @@ const Dashboard = () => {
       <Header />
       <div className="flex flex-row">
         <LeftContent />
-        <section className="flex flex-col gap-5 p-20">
+        <section className="bg-gray-100 flex flex-col w-screen gap-5 p-20">
           <div className="flex flex-col gap-3">
             <h1 className="text-2xl font-bold">Dashboard</h1>
             <p className="text-sm font-light">Selamat datang, Admin</p>
           </div>
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-row justify-center items-center gap-4">
             <div className="w-max h-max p-5 rounded-md shadow-md bg-sky-500 text-white hover:cursor-pointer">
               <div className="flex flex-col gap-2">
                 <div className="flex flex-row justify-center gap-2">
