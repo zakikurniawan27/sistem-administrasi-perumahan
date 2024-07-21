@@ -9,17 +9,21 @@ import { getDataRumah } from "../../store/action/rumahAction";
 import { GrTransaction } from "react-icons/gr";
 import { getDataTotalSaldoMasuk } from "../../store/action/pembayaranAction";
 import ContentGrafik from "../../components/ContentGrafik";
+import { getTotalSaldoPengeluaran } from "../../store/action/pengeluaranAction";
+import ContentGrafikKeluar from "../../components/ContentGrafikKeluar";
 
 const Dashboard = () => {
   const { data } = useSelector((state) => state.penghuni);
   const { rumah } = useSelector((state) => state.rumah);
   const { totalSaldoMasuk } = useSelector((state) => state.pembayaran);
+  const { totalSaldoKeluar } = useSelector((state) => state.pengeluaran);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getDataPenghuni());
     dispatch(getDataRumah());
     dispatch(getDataTotalSaldoMasuk());
+    dispatch(getTotalSaldoPengeluaran());
   }, [dispatch]);
   return (
     <main>
@@ -80,7 +84,7 @@ const Dashboard = () => {
                   <p className="text-xl font-medium uppercase">Saldo Keluar</p>
                 </div>
                 <p className="text-lg font-medium">
-                  Total Rumah : Rp {totalSaldoMasuk?.data}
+                  Total Rumah : Rp {totalSaldoKeluar?.data}
                 </p>
               </div>
             </div>
@@ -88,6 +92,10 @@ const Dashboard = () => {
           <div className="flex flex-col mt-10 gap-7">
             <h2 className="text-xl font-bold">Data Pemasukan Perbulan</h2>
             <ContentGrafik />
+          </div>
+          <div className="flex flex-col mt-10 gap-7">
+            <h2 className="text-xl font-bold">Data Pengeluaran Perbulan</h2>
+            <ContentGrafikKeluar />
           </div>
         </section>
       </div>

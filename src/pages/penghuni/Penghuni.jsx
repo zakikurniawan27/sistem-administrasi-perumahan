@@ -20,7 +20,7 @@ const Penghuni = () => {
       <Header />
       <div className="flex flex-row">
         <LeftContent />
-        <section className="bg-gray-100 flex flex-col gap-5 p-20 w-screen">
+        <section className="bg-gray-100 flex flex-col gap-5 p-20 w-screen h-screen">
           <div className="flex">
             <h1 className="text-2xl font-bold">Penghuni</h1>
           </div>
