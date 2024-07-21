@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import LeftContent from "../../components/LeftContent";
 import { MdCleaningServices } from "react-icons/md";
 import { Link } from "react-router-dom";
+import ContentGrafik from "../../components/ContentGrafik";
 
 const Pembayaran = () => {
   return (
@@ -10,7 +11,7 @@ const Pembayaran = () => {
       <Header />
       <div className="flex flex-row">
         <LeftContent />
-        <section className="bg-gray-100 flex flex-col w-screen gap-5 p-20">
+        <section className="bg-gray-100 flex flex-col w-screen h-max gap-5 p-20">
           <div className="flex">
             <h1 className="text-2xl font-bold">Pembayaran</h1>
           </div>
@@ -39,6 +40,10 @@ const Pembayaran = () => {
                 </div>
               </div>
             </Link>
+          </div>
+          <div className="flex flex-col mt-10 gap-7">
+            <h2 className="text-xl font-bold">Data Pemasukan Perbulan</h2>
+            <ContentGrafik />
           </div>
         </section>
       </div>
