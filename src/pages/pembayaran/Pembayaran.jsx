@@ -5,6 +5,7 @@ import { MdCleaningServices } from "react-icons/md";
 import { Link } from "react-router-dom";
 import ContentGrafik from "../../components/ContentGrafik";
 import { GiPayMoney } from "react-icons/gi";
+import ContentGrafikKeluar from "../../components/ContentGrafikKeluar";
 
 const Pembayaran = () => {
   return (
@@ -57,6 +58,10 @@ const Pembayaran = () => {
           <div className="flex flex-col mt-10 gap-7">
             <h2 className="text-xl font-bold">Data Pemasukan Perbulan</h2>
             <ContentGrafik />
+          </div>
+          <div className="flex flex-col mt-10 gap-7">
+            <h2 className="text-xl font-bold">Data Pengeluaran Perbulan</h2>
+            <ContentGrafikKeluar />
           </div>
         </section>
       </div>
